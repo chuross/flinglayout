@@ -12,13 +12,13 @@ class FlingLayout : FrameLayout {
 
     var isDragEnabled: Boolean = true
     var isDismissEnabled: Boolean = true
-    var dragListener: DragListener? = null
+    var positionChangeListener: PositionChangeListener? = null
     var dismissListener: DismissListener? = null
     private val threshold: Int = 1500
     private var dragHelper: ViewDragHelper? = null
     private var defaultChildX: Int? = null
     private var defaultChildY: Int? = null
-    private var dragRangeRate: Float? = null
+    private var positionRangeRate: Float? = null
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -48,14 +48,12 @@ class FlingLayout : FrameLayout {
             override fun onViewPositionChanged(changedView: View?, left: Int, top: Int, dx: Int, dy: Int) {
                 super.onViewPositionChanged(changedView, left, top, dx, dy)
 
-                if (dragHelper?.viewDragState != ViewDragHelper.STATE_DRAGGING) return
-
                 val defaultChildY = defaultChildY ?: return
                 val rangeY = (measuredHeight / 2)
                 val distance = Math.abs(top - defaultChildY)
 
-                dragRangeRate = Math.min(1F, distance.toFloat() / rangeY)
-                dragListener?.onDrag(top, left, dragRangeRate ?: 0F)
+                positionRangeRate = Math.min(1F, distance.toFloat() / rangeY)
+                positionChangeListener?.onPositionChanged(top, left, positionRangeRate ?: 0F)
             }
 
             override fun onViewReleased(releasedChild: View?, xvel: Float, yvel: Float) {
@@ -73,7 +71,7 @@ class FlingLayout : FrameLayout {
     }
 
     private fun onViewReleased(target: View, yvel: Float) {
-        dragRangeRate = null
+        positionRangeRate = null
 
         val x = defaultChildX ?: return
         val y = defaultChildY ?: return
@@ -120,9 +118,9 @@ class FlingLayout : FrameLayout {
         }
     }
 
-    interface DragListener {
+    interface PositionChangeListener {
 
-        fun onDrag(top: Int, left: Int, dragListener: Float)
+        fun onPositionChanged(top: Int, left: Int, positionRangeRate: Float)
     }
 
     interface DismissListener {

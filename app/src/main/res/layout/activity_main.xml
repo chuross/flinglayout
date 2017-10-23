@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.github.chuross.flinglayout.FlingLayout
+        android:id="@+id/fling_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
 
-        <View
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:background="@android:color/holo_blue_dark"/>
+            android:layout_height="match_parent" />
     </com.github.chuross.flinglayout.FlingLayout>
 
 </android.support.constraint.ConstraintLayout>
