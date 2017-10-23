@@ -1,7 +1,8 @@
-package com.github.chuross.flinglayout;
+package com.github.chuross.flinglayout.sample;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 
 public class MainActivity extends AppCompatActivity {
 

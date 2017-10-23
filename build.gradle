@@ -1,3 +1,14 @@
+ext {
+    androidProperties = [
+            buildTools: '26.0.1',
+            minSdk   : 15,
+            targetSdk: 26
+    ]
+    versions = [
+            kotlin    : '1.1.4',
+            supportLib: '26.0.0'
+    ]
+}
 
 buildscript {
     repositories {
@@ -5,12 +16,14 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.4'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven { url 'https://maven.google.com' }
     }
 }
 
