@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         imageView.setOnScaleChangeListener(new OnScaleChangedListener() {
             @Override
             public void onScaleChange(float scaleFactor, float focusX, float focusY) {
-                flingLayout.setDragEnabled(scaleFactor == 1F);
+                flingLayout.setDragEnabled(scaleFactor <= 1F);
             }
         });
 
