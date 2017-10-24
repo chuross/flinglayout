@@ -1,6 +1,8 @@
 [![](https://jitpack.io/v/chuross/flinglayout.svg)](https://jitpack.io/#chuross/flinglayout)
 
 # FlingLayout
+**Recommend using Kotlin project**
+
 This Layout provide fling dismiss effect like Twitter ImageView.
 
 ![](https://user-images.githubusercontent.com/1422031/31901843-b1bdb554-b85d-11e7-9ae4-cc49b3a161b2.gif)
@@ -21,6 +23,12 @@ Single View into FlingLayout.
     <!-- something view parent -->
 
 </com.github.chuross.flinglayout.FlingLayout>
+```
+
+### Using this layout
+```
+val flingLayout = findViewById<FlingLayout>(R.id.flinglayout)
+flingLayout.dismissListener = { /** something your code **/ }
 ```
 
 ### XMLAttributes
