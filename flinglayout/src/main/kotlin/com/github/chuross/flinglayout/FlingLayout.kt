@@ -84,8 +84,7 @@ class FlingLayout : FrameLayout {
 
         if (!isDismissEnabled) return
 
-        val distanceY = target.measuredHeight
-        val targetY = if (yvel > 0) measuredHeight + distanceY else -distanceY
+        val targetY = if (yvel > 0) measuredHeight else -target.measuredHeight
 
         dragHelper?.smoothSlideViewTo(target, x, targetY)
         invalidate()
