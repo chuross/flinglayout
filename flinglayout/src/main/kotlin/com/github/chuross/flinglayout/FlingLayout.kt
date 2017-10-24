@@ -8,6 +8,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 
+typealias PositionChangeListener = (top: Int, left: Int, positionRangeRate: Float) -> Unit
+typealias DismissListener = () -> Unit
+
 class FlingLayout : FrameLayout {
 
     var isDragEnabled: Boolean = true
@@ -53,7 +56,7 @@ class FlingLayout : FrameLayout {
                 val distance = Math.abs(top - defaultChildY)
 
                 positionRangeRate = Math.min(1F, distance.toFloat() / rangeY)
-                positionChangeListener?.onPositionChanged(top, left, positionRangeRate ?: 0F)
+                positionChangeListener?.invoke(top, left, positionRangeRate ?: 0F)
             }
 
             override fun onViewReleased(releasedChild: View?, xvel: Float, yvel: Float) {
@@ -89,7 +92,7 @@ class FlingLayout : FrameLayout {
         dragHelper?.smoothSlideViewTo(target, x, targetY)
         invalidate()
 
-        dismissListener?.onDismiss()
+        dismissListener?.invoke()
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
@@ -115,16 +118,6 @@ class FlingLayout : FrameLayout {
         if (dragHelper?.continueSettling(true) == true) {
             ViewCompat.postInvalidateOnAnimation(this)
         }
-    }
-
-    interface PositionChangeListener {
-
-        fun onPositionChanged(top: Int, left: Int, positionRangeRate: Float)
-    }
-
-    interface DismissListener {
-
-        fun onDismiss()
     }
 
 }

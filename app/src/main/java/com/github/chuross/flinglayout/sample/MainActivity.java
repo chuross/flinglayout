@@ -10,6 +10,10 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chuross.flinglayout.FlingLayout;
 import com.squareup.picasso.Picasso;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function3;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,18 +25,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final FlingLayout flingLayout = findViewById(R.id.fling_layout);
-        flingLayout.setDismissListener(new FlingLayout.DismissListener() {
-
+        flingLayout.setDismissListener(new Function0<Unit>() {
             @Override
-            public void onDismiss() {
+            public Unit invoke() {
                 Toast.makeText(MainActivity.this, "dismiss!!", Toast.LENGTH_LONG).show();
+                return Unit.INSTANCE;
             }
         });
-        flingLayout.setPositionChangeListener(new FlingLayout.PositionChangeListener() {
-
+        flingLayout.setPositionChangeListener(new Function3<Integer, Integer, Float, Unit>() {
             @Override
-            public void onPositionChanged(int top, int left, float dragRangeRate) {
+            public Unit invoke(Integer top, Integer left, Float dragRangeRate) {
                 flingLayout.setBackgroundColor(Color.argb(Math.round(255 * (1.0F - dragRangeRate)), 0, 0, 0));
+                return Unit.INSTANCE;
             }
         });
 
